@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy shares
+{% endblock %}
+
+
+
+{% block main %}
+<!-- displays user's transaction history-->
+    <div class="section">
+        <h2>
+            Transaction History
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction</th>
+                    <th>Date and Time</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Share value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TODO: Loop through the database entries to display them in this table -->
+                {% for row in history %}
+
+                <tr>
+                    <td class = "{{ row.type }}">{{ row.type }}</td>
+                    <td>{{ row.time }}</td>
+                    <td>{{ row.coy_ticker }}</td>
+                    <td>{{ row.quantity }}</td>
+                    <td>{{ row.price | usd}}</td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

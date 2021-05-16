@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>Some trivia!</title>
+
+        <!--javascript for my trivia page-->
+        <script>
+
+            // TODO: Add code to check answers to questions
+            document.addEventListener('DOMContentLoaded', function()  {
+
+                //Response for correct answer for multiple choice
+                let correct = document.querySelector('.correct');
+                correct.addEventListener('click', function() {
+                    correct.style.backgroundColor = 'green';
+                    document.querySelector('#feedback1').innerHTML = 'Correct! The world record is held by Du Yusheng. He broke the world record on 24 November 2018!';
+
+                });
+
+                //Response for wrong answer for multiple choice
+                let wrong = document.querySelectorAll('.wrong');
+                for (let i = 0; i < wrong.length; i++)
+                {
+                    wrong[i].addEventListener('click', function() {
+                        wrong[i].style.backgroundColor = 'red';
+                        document.querySelector('#feedback1').innerHTML = 'Incorrect';
+                    });
+                };
+
+                //Response for free response question
+                document.querySelector('#check').addEventListener('click', function() {
+                    let answer = document.querySelector('input');
+                    if (answer.value.toLowerCase() == "singapore") {
+                        answer.style.backgroundColor = 'green';
+                        document.querySelector('#feedback2').innerHTML = 'Correct!';
+                    }
+                    else {
+                        answer.style.backgroundColor = 'red';
+                        document.querySelector('#feeback2').innerHTML = 'Incorrect';
+                    }
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+
+        <!--Navigation bar at the top of the page, with 4 buttons for each page-->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d9be5b;">
+          <a class="navbar-brand" href="#">Ackj's Website</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <ul class="navbar-nav">
+                <li>
+                  <a class="nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li>
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hobbies</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="page1.html">Speedcubing</a>
+                    <a class="dropdown-item" href="page2.html">Computing</a>
+                  </div>
+                </li>
+
+                <li>
+                  <a class="nav-link" href="trivia.html" >Some trivia!</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Contents of the page-->
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- Multiple choice question here -->
+                <h3>What is official world record timing for solving a 3x3 Rubik's cube?</h3>
+                <button class = "wrong">4.22s</button>
+                <button class = "wrong">2.54s</button>
+                <button class = "correct">3.47s</button>
+                <button class = "wrong">7.66s</button>
+
+                <p id = "feedback1"></p>
+
+
+
+            </div>
+
+            <div class="section">
+                <!-- Free response question here -->
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>Which country was I born in?</h3>
+                <input type="text">
+                <button id="check">Check Answer</button>
+
+
+
+            </div>
+
+        </div>
+    </body>
+</html>

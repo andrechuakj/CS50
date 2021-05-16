@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy shares
+{% endblock %}
+
+
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="form-group">
+            <select name="symbol" class="sell">
+                <option>Stock</option>
+                {% for row in coys %}
+                <option value="{{ row.coy_ticker }}">{{ row.coy_ticker }}</option>
+                {% endfor %}
+            </select>
+            <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="Number of shares" type="text">
+            <button class="btn btn-primary buy" type="submit">Sell</button>
+        </div>
+    </form>
+
+
+    <div id="null"></div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let input = document.querySelector('select[name="symbol"]');
+            input.addEventListener('change', function() {
+                $.get('/search?symbol=' + input.value, function(stockvalue){
+                    let html = '';
+                    html += '<div class="section"><table><thead><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Symbol</th></tr></thead><tbody><tr><td>' + stockvalue.name + '</td><td>' + stockvalue.quantity + '</td><td>' + stockvalue.price + '</td><td>' + stockvalue.symbol + '</td></tr></tbody></table></div><div><h7>Accurate as of ' + stockvalue.time + '</h7></div>';
+                    document.querySelector('#null').innerHTML = html;
+                });
+            });
+        });
+    </script>
+{% endblock %}

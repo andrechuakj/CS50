@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Ticker" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Quote</button>
+    </form>
+    <div class="section">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Symbol</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listing">
+
+                        <tr>
+                            <td>{{stock_value.name}}</td>
+                            <td>{{stock_value.price | usd}}</td>
+                            <td>{{stock_value.symbol}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+{% endblock %}

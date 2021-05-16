@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+
+            // TODO: Add code to check answers to questions
+            document.addEventListener('DOMContentLoaded', function() {
+
+                //Response for correct answer for multiple choice
+                let correct = document.querySelector('.correct');
+                correct.addEventListener('click', function() {
+                    correct.style.backgroundColor = 'green';
+                    document.querySelector('#feedback1').innerHTML = 'Correct!';
+
+                });
+
+                //Response for wrong answer for multiple choice
+                let wrong = document.querySelectorAll('.wrong');
+                for (let i = 0; i < wrong.length; i++)
+                {
+                    wrong[i].addEventListener('click', function() {
+                        wrong[i].style.backgroundColor = 'red';
+                        document.querySelector('#feedback1').innerHTML = 'Incorrect';
+                    });
+                };
+
+                //Response for free response question
+                document.querySelector('#check').addEventListener('click', function() {
+                    let answer = document.querySelector('input');
+                    if (answer.value == "2") {
+                        answer.style.backgroundColor = 'green';
+                        document.querySelector('#feedback2').innerHTML = 'Correct!';
+                    }
+                    else {
+                        answer.style.backgroundColor = 'red';
+                        document.querySelector('#feeback2').innerHTML = 'Incorrect';
+                    }
+                });
+            });
+
+        </script>
+
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <h3>What is the rarest M&M color?</h3>
+                <button class = "wrong">Red</button>
+                <button class = "wrong">Blue</button>
+                <button class = "correct">Brown</button>
+                <button class = "wrong">Green</button>
+
+                <p id = "feedback1"></p>
+
+                <!-- TODO: Add multiple choice question here -->
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is the only even prime number?</h3>
+                <input type="text"></input>
+                <button id="check">Check Answer</button>
+
+                <!-- TODO: Add free response question here -->
+
+            </div>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let input = document.querySelector('#q');
+                input.addEventListener('change', function(){
+                    $.get('/search?q=' + input.value, function(list){
+                        let html = '';
+                        for (row in list)
+                        {
+                            html += "<tr><td>" + list[row].name + "</td><td>" + list[row].month + "/" + list[row].day + "</td></tr>";
+                        }
+                        document.querySelector('#listing').innerHTML = html;
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+                <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                     <form action="/" method="post">
+                         <input name="name" type="text" autocomplete="off" autofocus placeholder="Name">
+                         <input name="month" type="text" autocomplete="off" placeholder="Month">
+                         <input name="day" type="text" autocomplete="off" placeholder="Day">
+                         <input type="submit" value="Submit">
+
+                     </form>
+                     <select name="q" id="q">
+                         <option value="1">Latest Added</option>
+                         <option value="2">Earliest Added</option>
+                         <option value="3">Name (Ascending)</option>
+                         <option value="4">Name (Descending)</option>
+                         <option value="5">Date (Ascending)</option>
+                         <option value="6">Date (Descending)</option>
+                     </select>
+
+            </div>
+
+            <div class="section">
+
+                <h2>
+                    All Birthdays
+                    <a href="/edit" id="edit">Edit</a>
+                </h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listing">
+                        <!-- TODO: Loop through the database entries to display them in this table -->
+                        {% for row in birthdays %}
+
+                        <tr>
+                            <td>{{row.name}}</td>
+                            <td>{{row.month}}/{{row.day}}</td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy shares
+{% endblock %}
+
+
+
+{% block main %}
+<!-- display user's current account balance and grand total -->
+    <div class="section">
+        <h2>
+            Your account
+        </h2>
+        <table>
+            <tr>
+                <th>Current cash balance</th>
+                <td>{{ cash | usd }}</td>
+            </tr>
+            <tr>
+                <th>Grand total</th>
+                <td>${{ grandtotal | usd}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+<!-- displays user's portfolio-->
+    <div class="section">
+        <h2>
+            My portfolio
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Stock</th>
+                    <th>Ticker</th>
+                    <th>Share Value</th>
+                    <th>Quantity</th>
+                    <th>Total value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TODO: Loop through the database entries to display them in this table -->
+                {% for row in portfolio %}
+
+                <tr>
+                    <td>{{ row.coy_name }}</td>
+                    <td>{{ row.coy_ticker }}</td>
+                    <td>{{ row.price | usd }}</td>
+                    <td>{{ row.quantity }}</td>
+                    <td>{{ row.totalprice | usd}}</td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h7>
+            Accurate as of {{ time }}
+        </h7>
+    </div>
+
+{% endblock %}
